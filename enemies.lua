@@ -21,18 +21,19 @@ function enemyLoad()
 end
 
 function createEnemy()
-  local random_y = math.random(2,love.graphics.getHeight()-enemy.sprite.h-2)
+  local random_y = math.random(100,love.graphics.getHeight()-enemy.sprite.h-20)
+  print(random_y)
   local r = math.random()
-  
-  -- if r<0.5 then 
-  --   random_x = love.graphics.getWidth()-enemy.sprite.w-2
-  -- else 
-  --   random_x = 2 
-  -- end
-  random_x = 50
---  if canAddObject({height = enemy.sprite.h, width = enemy.sprite.w, x = random_x, y = random_y, vel={x=3, y=0}}) then
---    table.insert(enemies, {height = enemy.sprite.h, width = enemy.sprite.w, x = random_x, y = random_y, vel={x=3, y=0}})
---  end
+  --random_y = 50
+   if r<0.5 then 
+     random_x = love.graphics.getWidth()-enemy.sprite.w-2
+   else 
+     random_x = 50 
+  end
+
+  if canAddObject({height = enemy.sprite.h, width = enemy.sprite.w, x = random_x, y = random_y, vel={x=3, y=0}}) then
+    table.insert(enemies, {height = enemy.sprite.h, width = enemy.sprite.w, x = random_x, y = random_y, vel={x=3, y=0}})
+  end
 end
 
 function enemyUpdate(dt)
