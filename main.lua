@@ -12,7 +12,7 @@ function love.load()
     love.window.setFullscreen(true)
     sound = love.audio.newSource("assets/sound/watery_cave.mp3")
     sound:setLooping(true)
-    --sound:play()
+    sound:play()
 end
 
 started = false
@@ -35,8 +35,6 @@ function love.update(dt)
     os.exit(0)
   end
   if #world.blobs == howManyRescuedBlobs() then
-    print(#world.blobs)
-    print(howManyRescuedBlobs())
     success = true
   end
   if player.health <=0 then
