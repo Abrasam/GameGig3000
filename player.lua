@@ -14,7 +14,7 @@ function playerLoad()
     player.ACC = 8
     player.DEC = 8
     
-    player.state = "still"
+    player.state = "right"
     player.width = 50
     player.height = 50
 
@@ -32,24 +32,8 @@ function playerLoad()
     end
 end
 
-function setPos(p,x,y)
-    if x < 0 then
-        p.x = 0
-        p.vel.x = 0
-    elseif x > love.graphics.getWidth() - p.width then
-        p.x = love.graphics.getWidth() - p.width
-        p.vel.x = 0
-    
-    elseif y < 0 then
-        p.y = 0
-        p.vel.y = 0
-    elseif y > love.graphics.getHeight() - p.height - 56 then
-        p.y = love.graphics.getHeight() - p.height - 56
-        p.vel.y = 0
-    else 
-        p.x = x
-        p.y = y
-    end
+function playerHurt(x)
+    player.health = player.health - x
 end
 
 
