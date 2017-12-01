@@ -36,7 +36,7 @@ function love.update(dt)
 
   if started then
     playerUpdate()
-    
+    blobUpdate()    
     updateWorld(dt, player)
     enemyUpdate(dt)
     bulletUpdate(enemies)
@@ -62,7 +62,7 @@ function love.draw()
       love.graphics.draw(blobby, 585, 60)
       love.graphics.setColor(0, 255, 0)
       love.graphics.draw(love.graphics.newText(love.graphics.newFont(50), "mBlobbies"), 800, 500)
-      love.graphics.draw(love.graphics.newText(love.graphics.newFont(20), "You have saved us!"), 832, 560)
+      love.graphics.draw(love.graphics.newText(love.graphics.newFont(20), "And so, we are done"), 832, 560)
       love.graphics.setColor(255, 255, 255)
     elseif failure then
       love.graphics.draw(blobby, 585, 60)
