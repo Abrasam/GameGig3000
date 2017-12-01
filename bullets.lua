@@ -11,6 +11,9 @@ function bulletUpdate(enemies)
         for j=#enemies, 1, -1 do
             if objCollision(bullets[i], enemies[j]) then
                 table.remove(enemies, j)
+            elseif not canAddObject(bullets[i]) then
+                table.remove(bullets,i)
+                break
         end
         end
     end
@@ -29,7 +32,7 @@ function addBullet(d, startX, startY)
     time = love.timer.getTime()    
     print(time - lastBullet)
     if time - lastBullet > 0.5 then
-        table.insert(bullets, {x=startX,y=startY,dir=d, width=5, height=5})        
+        table.insert(bullets, {x=startX,y=startY, vel = {x = BULLET_VEL, y = 0},dir=d, width=5, height=5})        
         lastBullet =love.timer.getTime()    
         
     end
