@@ -11,16 +11,36 @@ function enemyLoad()
   enemies = {}
 
   for i=0, 10 do
-    local random_y = math.random(0,love.graphics.getHeight())
-    table.insert(enemies, {height = enemy.sprite.h, width = enemy.sprite.w, x = 50, y = random_y, vel={x=3, y=0}})
+    createEnemy()
   end
 
   for x=0, 3 do
     table.insert(enemy.quads,love.graphics.newQuad(x*enemy.sprite.w,0,enemy.sprite.w,enemy.sprite.h,enemy.SS:getDimensions()))
   end
+  enemiesPerSec = 1
+end
+
+function createEnemy()
+  local random_y = math.random(2,love.graphics.getHeight()-enemy.sprite.h-2)
+  local r = math.random()
+  
+  -- if r<0.5 then 
+  --   random_x = love.graphics.getWidth()-enemy.sprite.w-2
+  -- else 
+  --   random_x = 2 
+  -- end
+  random_x = 50
+  if canAddObject({height = enemy.sprite.h, width = enemy.sprite.w, x = random_x, y = random_y, vel={x=3, y=0}}) then
+    table.insert(enemies, {height = enemy.sprite.h, width = enemy.sprite.w, x = random_x, y = random_y, vel={x=3, y=0}})
+  end
 end
 
 function enemyUpdate(dt)
+  if drawCount % 60 == 0 then enemiesPerSec = enemiesPerSec + 1 end
+
+  if drawCount % (60/enemiesPerSec) == 0 then createEnemy() end
+
+
   for i=#enemies, 1, -1 do
     
     enemies[i].x = enemies[i].x + enemies[i].vel.x
