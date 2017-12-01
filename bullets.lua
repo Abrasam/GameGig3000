@@ -10,8 +10,8 @@ function bulletUpdate(enemies)
     for i=#bullets, 1, -1 do
         for j=#enemies, 1, -1 do
             if objCollision(bullets[i], enemies[j]) then
-                table.remove(enemies,j)
-            end
+                table.remove(enemies, j)
+        end
         end
     end
 

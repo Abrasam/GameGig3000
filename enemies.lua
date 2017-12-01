@@ -30,9 +30,9 @@ function createEnemy()
    else 
      random_x = 50 
   end
-
-  if canAddObject({height = enemy.sprite.h, width = enemy.sprite.w, x = random_x, y = random_y, vel={x=3, y=0}}) then
-    table.insert(enemies, {height = enemy.sprite.h, width = enemy.sprite.w, x = random_x, y = random_y, vel={x=3, y=0}})
+  o = {height = enemy.sprite.h, width = enemy.sprite.w, x = random_x, y = random_y, vel={x=math.random(1,4), y=math.random(1,4)}}
+  if canAddObject(o) then
+    table.insert(enemies, o)
   end
 end
 
@@ -45,6 +45,7 @@ function enemyUpdate(dt)
   for i=#enemies, 1, -1 do
     
     enemies[i].x = enemies[i].x + enemies[i].vel.x
+    enemies[i].y = enemies[i].y + enemies[i].vel.y
 
   end
 end
