@@ -7,7 +7,7 @@ function enemyLoad()
   enemy.sprite = {w = 54, h = 49} 
   enemy.drawCount = 0
   enemy.updateTime = 10
-  
+
   enemies = {}
 
   for i=0, 10 do
