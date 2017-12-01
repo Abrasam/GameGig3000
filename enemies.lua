@@ -14,7 +14,7 @@ function enemyLoad()
   table.insert(enemies, {x = 50, y = 50})
 
   for x=0, 3 do
-    table.insert(enemy.quads,love.graphics.newQuad(x*enemy.sprite.h,0,enemy.sprite.w,enemy.sprite.h,enemy.SS:getDimensions()))
+    table.insert(enemy.quads,love.graphics.newQuad(x*enemy.sprite.w,0,enemy.sprite.w,enemy.sprite.h,enemy.SS:getDimensions()))
   end
 end
 
