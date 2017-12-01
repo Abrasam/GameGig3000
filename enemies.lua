@@ -1,17 +1,24 @@
 enemies = {}
 
 function enemyLoad()
-  enemy = {SS = love.graphics.newImage("assets/img/enemies/fishbig.png")}
+  enemy = {SS = love.graphics.newImage("assets/img/enemies/fish-big.png")}
   enemy.quads = {}
   enemy.sprite = {w = 54, h = 49} 
   enemy.drawCount = 0
+  enemy.updateTime = 10
 
   enemies = {}
 
   table.insert(enemies, {x = 50, y = 50})
 
   for x=0, 3 do
-    table.insert(enemy.quads,love.graphics.newQuad(x*54,0,enemy.sprite.w,enemy.sprite.h,enemySprites:getDimensions()))
+    table.insert(enemy.quads,love.graphics.newQuad(x*54,0,enemy.sprite.w,enemy.sprite.h,enemy.SS:getDimensions()))
+  end
+end
+
+function enemyUpdate(dt)
+  for i=#enemies, 1, -1 do
+    enemies[i].x = enemies[i].x + 5
   end
 end
 
@@ -19,6 +26,6 @@ function enemyDraw()
   enemy.drawCount = enemy.drawCount + 1
   for i=#enemies, 1, -1 do
     thisEnemy = enemies[i]  
-    love.graphics.draw(enemy.SS, enemy.quads[enemy.drawCount//4 + 1], thisEnemy.x, thisEnemy.y)
+    love.graphics.draw(enemy.SS, enemy.quads[math.floor(enemy.drawCount / enemy.updateTime) % 4 + 1], thisEnemy.x, thisEnemy.y)
   end
 end
