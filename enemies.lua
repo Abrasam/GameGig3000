@@ -11,9 +11,8 @@ function enemyLoad()
   enemies = {}
 
   for i=0, 10 do
-    local x = math.random(0,love.graphics.getWidth())
-    table.insert(enemies, {height = enemy.sprite.h, width = enemy.sprite.w, x = 50, y = 50})
-
+    local random_y = math.random(0,love.graphics.getHeight())
+    table.insert(enemies, {height = enemy.sprite.h, width = enemy.sprite.w, x = 50, y = random_y, vel={x=3, y=0}})
   end
 
   for x=0, 3 do
@@ -23,7 +22,9 @@ end
 
 function enemyUpdate(dt)
   for i=#enemies, 1, -1 do
-    enemies[i].x = enemies[i].x + 1
+    
+    enemies[i].x = enemies[i].x + vel.x
+
   end
 end
 
