@@ -16,7 +16,8 @@ function love.load()
 end
 
 started = false
-success = true
+success = false
+failure = false
 
 function love.update(dt)
   collisionUpdate()
@@ -34,23 +35,42 @@ function love.update(dt)
     os.exit(0)
   end
   if #world.blobs == howManyRescuedBlobs() then
+    print(#world.blobs)
+    print(howManyRescuedBlobs())
     success = true
+  end
+  if player.health <=0 then
+    failure = true
   end
 end
 
 function love.draw()
   if started then
-    drawWorld()
-    playerDraw()
-    enemyDraw()
-    blobUpdate()
-    love.graphics.setColor(50, 50, 50)
-    love.graphics.rectangle("fill", 0, 1024, 1920, 1080-1024)
-    love.graphics.setColor(255, 0, 0)
-    love.graphics.draw(love.graphics.newText(love.graphics.newFont(20), "Health: " .. player.health .. "/100"), 100, 1040)
-    love.graphics.setColor(0, 255, 0)
-    love.graphics.draw(love.graphics.newText(love.graphics.newFont(20), "Rescued Blobbies: " .. howManyRescuedBlobs() .. "/" .. #world.blobs), 400, 1040)
-    love.graphics.setColor(255, 255, 255)
+    if success then
+      love.graphics.draw(blobby, 585, 60)
+      love.graphics.setColor(0, 255, 0)
+      love.graphics.draw(love.graphics.newText(love.graphics.newFont(50), "mBlobbies"), 800, 500)
+      love.graphics.draw(love.graphics.newText(love.graphics.newFont(20), "You have saved us!"), 832, 560)
+      love.graphics.setColor(255, 255, 255)
+    elseif failure then
+      love.graphics.draw(blobby, 585, 60)
+      love.graphics.setColor(255, 0, 0)
+      love.graphics.draw(love.graphics.newText(love.graphics.newFont(50), "mBlobbies"), 800, 500)
+      love.graphics.draw(love.graphics.newText(love.graphics.newFont(20), "You left us to die!"), 832, 560)
+      love.graphics.setColor(255, 255, 255)
+    else
+      drawWorld()
+      playerDraw()
+      enemyDraw()
+      blobUpdate()
+      love.graphics.setColor(50, 50, 50)
+      love.graphics.rectangle("fill", 0, 1024, 1920, 1080-1024)
+      love.graphics.setColor(255, 0, 0)
+      love.graphics.draw(love.graphics.newText(love.graphics.newFont(20), "Health: " .. player.health .. "/100"), 100, 1040)
+      love.graphics.setColor(0, 255, 0)
+      love.graphics.draw(love.graphics.newText(love.graphics.newFont(20), "Rescued Blobbies: " .. howManyRescuedBlobs() .. "/" .. #world.blobs), 400, 1040)
+      love.graphics.setColor(255, 255, 255)
+    end
   else
     love.graphics.draw(blobby, 585, 60)
     love.graphics.draw(love.graphics.newText(love.graphics.newFont(50), "mBlobbies"), 800, 500)
