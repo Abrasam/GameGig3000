@@ -17,7 +17,7 @@ function drawWorld()
 end
 
 function updateWorld(dt)
-  explode(math.random(0, 1920), math.random(0, 800))
+  explode(math.random(0, 119), math.random(0, 63))
   kill = {}
   for i=1,#world.explosions do
     world.explosions[i]:delta(dt)
@@ -39,5 +39,12 @@ function pass(x, y)
 end
 
 function explode(x, y)
-  world.explosions[#world.explosions+1] = (Explosion:new(x,y,3))
+  world.explosions[#world.explosions+1] = (Explosion:new(x*16,y*16))
+  for i=(x*16),(x*16+78*2) do
+    for j=(y*16),(y*16+87*2) do
+      if math.pow(j-(y*16+87), 2) + math.pow(i-(x*16+78), 2) <= 4*16*4*16 and math.floor(j/16) <= 64 and math.floor(i/16) <= 120 then
+        world.map[math.floor(j/16)][math.floor(i/16)] = 0
+      end
+    end
+  end
 end
