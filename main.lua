@@ -12,7 +12,7 @@ function love.load()
     love.window.setFullscreen(true)
     sound = love.audio.newSource("assets/sound/watery_cave.mp3")
     sound:setLooping(true)
-    //sound:play()
+    --sound:play()
 end
 
 started = false
