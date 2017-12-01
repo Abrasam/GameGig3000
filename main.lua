@@ -1,5 +1,5 @@
 require "world"
-require "collision"
+require "lib"
 require "player"
 
 function love.load()

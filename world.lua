@@ -5,7 +5,7 @@ world = {}
 for i=1,128 do
   world[i] = {}
   for j=1,128 do
-    world[i][j] = 1
+    world[i][j] = math.random(0,2)
   end
 end
 
