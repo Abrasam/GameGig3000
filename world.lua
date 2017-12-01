@@ -3,8 +3,6 @@ require "explosion"
 
 worldTextures = {[0] = love.graphics.newImage("assets/img/environment/bgtile.png"); [1] = love.graphics.newImage("assets/img/environment/sand.png"); [2] = love.graphics.newImage("assets/img/environment/stone.png")}
 
-worldBackground = love.graphics.newImage("assets/img/environment/bgtile.png")
-
 world = {map=world_01, entities={}, explosions={}}
 
 function drawWorld()
@@ -13,11 +11,22 @@ function drawWorld()
       love.graphics.draw(worldTextures[world.map[y][x]], (x-1)*16, (y-1)*16)
     end
   end
+  for i=1,#world.explosions do
+    world.explosions[i]:draw()
+  end
 end
 
 function updateWorld(dt)
+  explode(math.random(0, 1920), math.random(0, 800))
+  kill = {}
   for i=1,#world.explosions do
-    explosions[i].delta(dt)
+    world.explosions[i]:delta(dt)
+    if world.explosions[i].dead then
+      table.insert(kill, i)
+    end
+  end
+  for i=1,#kill do
+    table.remove(world.explosions, kill[i])
   end
 end
 
@@ -30,5 +39,5 @@ function pass(x, y)
 end
 
 function explode(x, y)
-  world.explosions.add(Explosion:new(x,y, 3))
+  world.explosions[#world.explosions+1] = (Explosion:new(x,y,3))
 end
