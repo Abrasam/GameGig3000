@@ -26,8 +26,8 @@ function setPos(p,x,y)
         p.x = love.graphics.getWidth() - p.width
         p.vel.x = 0
     
-    elseif y < 0 then
-        p.y = 0
+    elseif y < 50 then
+        p.y = 50
         p.vel.y = 0
     elseif y > love.graphics.getHeight() - p.height  then
         p.y = love.graphics.getHeight() - p.height
