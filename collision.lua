@@ -42,7 +42,7 @@ function updateObject(obj,newVel)
   for i = 0, obj.width, 16 do
     if get(math.floor((obj.x + i)/16)+1,math.floor(obj.y/16)+1) ~= 0 and obj.vel.y < 0 then
       obj.vel.y = -newVel.y
-      obj.y = math.floor(obj.y/16)*16
+      obj.y = math.floor(obj.y/16)*16+1
       return obj.vel.y
     end
     if get(math.floor((obj.x + i)/16)+1,math.floor((obj.y+obj.height)/16)+1) ~= 0 and obj.vel.y > 0 then
