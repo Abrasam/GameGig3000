@@ -18,7 +18,7 @@ end
 
 function enemyUpdate(dt)
   for i=#enemies, 1, -1 do
-    enemies[i].x = enemies[i].x + 5
+    enemies[i].x = enemies[i].x + 1 
   end
 end
 
