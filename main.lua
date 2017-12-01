@@ -36,6 +36,7 @@ function love.update(dt)
 
   if started then
     playerUpdate()
+    
     updateWorld(dt, player)
     enemyUpdate(dt)
     bulletUpdate(enemies)

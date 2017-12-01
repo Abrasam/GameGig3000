@@ -15,7 +15,7 @@ function playerLoad()
     player.DEC = 8
     
     player.state = "right"
-    player.dir = "l"
+    player.dir = 1
     player.width = 80
     player.height = 30
 
