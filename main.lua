@@ -3,6 +3,7 @@ require "lib"
 require "player"
 require "enemies"
 require "collision"
+require "bubble"
 
 function love.load()
     playerLoad()
@@ -18,8 +19,17 @@ end
 started = false
 success = false
 failure = false
+bubbles = {}
 
 function love.update(dt)
+  if math.random(0, 30) == 2 then
+    table.insert(bubbles, Bubble:new(math.random(10, 1910), 1020))
+  end
+  
+  for i=1,#bubbles do
+    bubbles[i]:delta(dt)
+  end
+  
   collisionUpdate()
 
   if started then
@@ -61,6 +71,9 @@ function love.draw()
       playerDraw()
       enemyDraw()
       blobUpdate()
+      for i=1,#bubbles do
+        bubbles[i]:draw()
+      end
       love.graphics.setColor(50, 50, 50)
       love.graphics.rectangle("fill", 0, 1024, 1920, 1080-1024)
       love.graphics.setColor(255, 0, 0)
@@ -73,7 +86,7 @@ function love.draw()
     love.graphics.draw(blobby, 585, 60)
     love.graphics.draw(love.graphics.newText(love.graphics.newFont(50), "mBlobbies"), 800, 500)
     love.graphics.draw(love.graphics.newText(love.graphics.newFont(20), "Press enter to start..."), 832, 560)
-    love.graphics.draw(love.graphics.newText(love.graphics.newFont(10), "A game by James Rhodes, Anik Roy and Sam Sully."), 1600, 1000)
+    love.graphics.draw(love.graphics.newText(love.graphics.newFont(14), "A game by James Rhodes, Anik Roy and Sam Sully."), 1500, 1000)
   end
 end
 
