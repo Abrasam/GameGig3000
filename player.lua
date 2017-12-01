@@ -14,13 +14,13 @@ function playerLoad()
     player.ACC = 8
     player.DEC = 8
     
-    player.state = "still"
+    player.state = "right"
     player.width = 50
     player.height = 50
 
     player.SS = love.graphics.newImage("assets/img/player/player-swiming.png")
     player.quads = {}
-    player.sprite = {w = 80, h = 100} 
+    player.sprite = {w = 80, h = 30} 
     player.drawCount = 1
     player.updateTime = 10
  
@@ -28,28 +28,12 @@ function playerLoad()
     player.health = 100
 
     for x=0, 5 do
-        table.insert(player.quads,love.graphics.newQuad(x*player.sprite.w,0,player.sprite.w,player.sprite.h,player.SS:getDimensions()))    
+        table.insert(player.quads,love.graphics.newQuad(x*player.sprite.w,30,player.sprite.w,player.sprite.h,player.SS:getDimensions()))    
     end
 end
 
-function setPos(player,x,y)
-    if x < 0 then
-        player.x = 0
-        player.vel.x = 0
-    elseif x > love.graphics.getWidth() - player.width then
-        player.x = love.graphics.getWidth() - player.width
-        player.vel.x = 0
-    
-    elseif y < 0 then
-        player.y = 0
-        player.vel.y = 0
-    elseif y > love.graphics.getHeight() - player.height then
-        player.y = love.graphics.getHeight() - player.height
-        player.vel.y = 0
-    else 
-        player.x = x
-        player.y = y
-    end
+function playerHurt(x)
+    player.health = player.health - x
 end
 
 
@@ -112,7 +96,7 @@ end
 
 function drawCentre(angle)
     thisQuad = player.quads[math.floor(player.drawCount / player.updateTime) % 4 + 1]
-    love.graphics.draw(player.SS, thisQuad:flip(true, false), player.x, player.y, angle, 1, 1, 40,50)    
+    love.graphics.draw(player.SS, thisQuad:flip(true, false), player.x, player.y, angle, 1, 1, 40,25)    
 end
 
 function playerDraw()
@@ -123,13 +107,13 @@ function playerDraw()
     thisQuad = player.quads[math.floor(player.drawCount / player.updateTime) % 4 + 1]
     
     if player.state == "right" then
-        love.graphics.draw(player.SS, thisQuad, player.x, player.y, 0, 1, 1, 40,50)    
+        love.graphics.draw(player.SS, thisQuad, player.x, player.y, 0, 1, 1, 40,25)    
     elseif player.state == "left" then
-        love.graphics.draw(player.SS, thisQuad, player.x, player.y, 0, -1, 1, 40,50)    
+        love.graphics.draw(player.SS, thisQuad, player.x, player.y, 0, -1, 1, 40,25)    
     elseif player.state == "up" then
-        love.graphics.draw(player.SS, thisQuad, player.x, player.y, -math.pi/4, 1, 1, 40,50)    
+        love.graphics.draw(player.SS, thisQuad, player.x, player.y, 0, 1, 1, 40,25)    
     elseif player.state == "down" then
-        love.graphics.draw(player.SS, thisQuad, player.x, player.y, math.pi/4, 1, 1, 40,50)    
+        love.graphics.draw(player.SS, thisQuad, player.x, player.y, 0, 1, 1, 40,25)    
     end
 end
 
