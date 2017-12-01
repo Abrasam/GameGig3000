@@ -15,8 +15,8 @@ function playerLoad()
     player.DEC = 8
     
     player.state = "right"
-    player.width = 50
-    player.height = 50
+    player.width = 80
+    player.height = 30
 
     player.SS = love.graphics.newImage("assets/img/player/player-swiming.png")
     player.quads = {}
@@ -33,7 +33,7 @@ function playerLoad()
 end
 
 function playerHurt(x)
-    player.health = player.health - x
+    player.health = player.health - 10
 end
 
 

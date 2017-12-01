@@ -7,12 +7,13 @@ function enemyLoad()
   enemy.sprite = {w = 54, h = 49} 
   enemy.drawCount = 0
   enemy.updateTime = 10
-  enemy.height = enemy.sprite.h
-  enemy.width = enemy.sprite.w
 
   enemies = {}
 
-  table.insert(enemies, {x = 50, y = 50})
+  for i=0, 10 do
+    local random_y = math.random(0,love.graphics.getHeight())
+    table.insert(enemies, {height = enemy.sprite.h, width = enemy.sprite.w, x = 50, y = random_y, vel={x=3, y=0}})
+  end
 
   for x=0, 3 do
     table.insert(enemy.quads,love.graphics.newQuad(x*enemy.sprite.w,0,enemy.sprite.w,enemy.sprite.h,enemy.SS:getDimensions()))
@@ -21,7 +22,9 @@ end
 
 function enemyUpdate(dt)
   for i=#enemies, 1, -1 do
-    enemies[i].x = enemies[i].x + 1 
+    
+    enemies[i].x = enemies[i].x + enemies[i].vel.x
+
   end
 end
 
