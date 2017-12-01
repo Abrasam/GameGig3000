@@ -13,6 +13,14 @@ function objCollision(obj1, obj2)
   return AABB(obj1.x,obj1.y,obj1.width,obj1.height, obj2.x, obj2.y, obj2.width, obj2.height)
 end
 
+function canAddObject(obj)
+  if updateObject(obj, {x = 1, y = 1}) == -1 then
+    return false
+  else
+    return true
+  end
+end
+
 function updateObject(obj,newVel)
   if obj.x < 0 and obj.vel.x < 0 then
     obj.vel.x = -newVel.x
