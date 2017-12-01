@@ -18,7 +18,7 @@ function canAddObject(obj)
     return false
   end
 
-  if updateObject(obj, {x = 1, y = 1}) == -1 then
+  if updateObject(obj, {x = 1, y = 1}).vel.x == -1 or updateObject(obj, {x = 1, y = 1}).vel.y == -1 then
     return false
   else
     return true
@@ -47,12 +47,10 @@ function updateObject(obj,newVel)
     if not pass(math.floor((obj.x + i)/16)+1,math.floor(obj.y/16)+1) and obj.vel.y < 0 then
       obj.vel.y = -newVel.y
       obj.y = math.floor(obj.y/16)*16+1
-      return obj.vel.y
     end
     if not pass(math.floor((obj.x + i)/16)+1,math.floor((obj.y+obj.height)/16)-1) and obj.vel.y > 0 then
       obj.vel.y = -newVel.y
       obj.y = math.floor(obj.y/16)*16
-      return obj.vel.y
     end
   end
  
@@ -60,12 +58,12 @@ function updateObject(obj,newVel)
     if not pass(math.ceil(obj.x/16),math.ceil((obj.y + i)/16)) and obj.vel.x < 0 then
       obj.vel.x = -newVel.x
       obj.x = math.floor(obj.x/16)*16+1
-      return obj.vel.x
     end
     if not pass(math.floor((obj.x+obj.height)/16)+1,math.floor((obj.y + i)/16)+1) and obj.vel.x > 0 then
       obj.vel.x = -newVel.x
       obj.x = math.floor(obj.x/16)*16
-      return obj.vel.x
     end
-  end 
+  end
+
+  return obj 
 end
