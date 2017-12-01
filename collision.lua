@@ -14,7 +14,7 @@ function objCollision(obj1, obj2)
 end
 
 function canAddObject(obj)
-  if obj.x > love.graphics.getWidth() or obj.x < 0 or obj.y < 0 or obj.y > love.graphics.getHeight() then
+  if obj.x + obj.width >= love.graphics.getWidth()  or obj.x < 1 or obj.y < 1 or obj.y + obj.height >= love.graphics.getHeight() then
     return false
   end
 
