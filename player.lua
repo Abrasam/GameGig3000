@@ -32,23 +32,23 @@ function playerLoad()
     end
 end
 
-function setPos(player,x,y)
+function setPos(p,x,y)
     if x < 0 then
-        player.x = 0
-        player.vel.x = 0
-    elseif x > love.graphics.getWidth() - player.width then
-        player.x = love.graphics.getWidth() - player.width
-        player.vel.x = 0
+        p.x = 0
+        p.vel.x = 0
+    elseif x > love.graphics.getWidth() - p.width then
+        p.x = love.graphics.getWidth() - p.width
+        p.vel.x = 0
     
     elseif y < 0 then
-        player.y = 0
-        player.vel.y = 0
-    elseif y > love.graphics.getHeight() - player.height then
-        player.y = love.graphics.getHeight() - player.height
-        player.vel.y = 0
+        p.y = 0
+        p.vel.y = 0
+    elseif y > love.graphics.getHeight() - p.height - 56 then
+        p.y = love.graphics.getHeight() - p.height - 56
+        p.vel.y = 0
     else 
-        player.x = x
-        player.y = y
+        p.x = x
+        p.y = y
     end
 end
 
