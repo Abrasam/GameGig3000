@@ -5,6 +5,9 @@ function collisionUpdate()
     updateObject(thisEnemy, thisEnemy.vel)
     if objCollision(player,thisEnemy) then
       playerHurt()
+      hurtTime = 0.25
+      love.graphics.setColor(255, 0, 0)
+  
     end
   end  
 end
