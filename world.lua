@@ -20,9 +20,15 @@ function drawWorld()
 end
 
 timeSinceLastMine = 1000
+hurtTime = -1
 
 function updateWorld(dt, p)
-  love.graphics.setColor(255, 255, 255)
+  if hurtTime <= 0 then
+    love.graphics.setColor(255, 255, 255)
+  else
+    love.graphics.setColor(255, 0, 0)
+    hurtTime = hurtTime - dt
+  end
   timeSinceLastMine = timeSinceLastMine + dt
   --explode(math.random(0, 119), math.random(0, 63))
   if love.keyboard.isDown("space") and timeSinceLastMine > 2 then
@@ -70,6 +76,7 @@ function explode(x, y, p)
   end
   if distSq(p.x, p.y, x*16+78, y*16+87) <= 3*16*3*16 then
     p.health = p.health - 20
+    hurtTime = 0.25
     love.graphics.setColor(255, 0, 0)
   end
   --Do same for all entities
