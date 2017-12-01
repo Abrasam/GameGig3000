@@ -7,7 +7,7 @@ function love.load()
     love.window.setFullscreen(true)
 end
 
-function love.update()
+function love.update(dt)
     playerUpdate()
     if love.keyboard.isDown("escape") then
       os.exit(0)
