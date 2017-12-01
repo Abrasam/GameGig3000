@@ -15,6 +15,7 @@ function playerLoad()
     player.DEC = 8
     
     player.state = "right"
+    player.dir = "l"
     player.width = 80
     player.height = 30
 
@@ -33,7 +34,7 @@ function playerLoad()
 end
 
 function playerHurt(x)
-    player.health = player.health - 10
+    player.health = player.health - 1
 end
 
 
@@ -60,11 +61,13 @@ function playerUpdate()
 
     if love.keyboard.isDown("a") then
         player.state = "left"
+        player.dir = -1
         player.vel.x = clamp(player.vel.x -  player.ACC*dt, -player.MAXVEL)
         setPos(player, player.x + player.vel.x, player.y + player.vel.y)
         
     elseif love.keyboard.isDown("d") then
         player.state = "right"
+        player.dir = 1
         player.vel.x = clamp(player.vel.x +  player.ACC*dt, player.MAXVEL)
         setPos(player, player.x + player.vel.x, player.y + player.vel.y)
     else
