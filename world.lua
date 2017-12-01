@@ -21,12 +21,13 @@ end
 
 timeSinceLastMine = 1000
 
-function updateWorld(dt, px, py)
+function updateWorld(dt, p)
+  love.graphics.setColor(255, 255, 255)
   timeSinceLastMine = timeSinceLastMine + dt
   --explode(math.random(0, 119), math.random(0, 63))
   if love.keyboard.isDown("space") and timeSinceLastMine > 2 then
     timeSinceLastMine = 0
-    table.insert(world.mines, Mine:new(px, py))
+    table.insert(world.mines, Mine:new(p.x/16, p.y/16, p))
   end
   kill = {}
   for i=1,#world.explosions do
@@ -67,8 +68,9 @@ function explode(x, y, p)
       end
     end
   end
-  if distSq(p.x, p.y, x*16-78, y*16-87) <= 3*16*3*16) then
+  if distSq(p.x, p.y, x*16+78, y*16+87) <= 3*16*3*16 then
     p.health = p.health - 20
+    love.graphics.setColor(255, 0, 0)
   end
   --Do same for all entities
 end
@@ -76,7 +78,7 @@ end
 Mine = {}
 
 function Mine:new(xx, yy, pp)
-  local fields = {x=xx, y=yy, p=pp t=0, exploded=false, imageFile=love.graphics.newImage("assets/img/enemies/mine-small.png")}
+  local fields = {x=xx, y=yy, p=pp, t=0, exploded=false, imageFile=love.graphics.newImage("assets/img/enemies/mine-small.png")}
   self.__index = self
   return setmetatable(fields, self)
 end

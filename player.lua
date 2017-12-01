@@ -54,6 +54,7 @@ end
 
 
 function playerUpdate()
+    print(player.health)
     local dt = love.timer.getDelta()
 
     if love.keyboard.isDown("w") then
