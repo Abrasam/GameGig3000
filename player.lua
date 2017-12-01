@@ -1,8 +1,8 @@
 function playerLoad()
     player = {}
     
-    player.x = 0
-    player.y = 0
+    player.x = 100
+    player.y = 100
 
     player.vel = {}
     player.vel.x = 0
@@ -22,6 +22,9 @@ function playerLoad()
     player.drawCount = 1
     player.updateTime = 10
  
+
+    player.health = 100
+
     for x=0, 5 do
         table.insert(player.quads,love.graphics.newQuad(x*player.sprite.w,0,player.sprite.w,player.sprite.h,player.SS:getDimensions()))    
     end
