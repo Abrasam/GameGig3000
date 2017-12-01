@@ -19,7 +19,7 @@ function playerLoad()
     player.SS = love.graphics.newImage("assets/img/player/player-swiming.png")
     player.quads = {}
     player.sprite = {w = 80, h = 100} 
-    player.drawCount = 0
+    player.drawCount = 1
     player.updateTime = 10
  
     for x=0, 5 do
@@ -112,20 +112,26 @@ function playerUpdate()
     setPos(player, player.x + player.vel.x, player.y + player.vel.y)
 end
 
+function drawCentre(angle)
+    thisQuad = player.quads[math.floor(player.drawCount / player.updateTime) % 4 + 1]
+    love.graphics.draw(player.SS, thisQuad:flip(true, false), player.x, player.y, angle, 1, 1, 40,50)    
+end
 
 function playerDraw()
     -- love.graphics.setColor(255,100,255)
     -- love.graphics.rectangle("fill", player.x, player.y, 50, 50)
     -- love.graphics.setColor(255,255,255)
     player.drawCount = player.drawCount + 1
+    thisQuad = player.quads[math.floor(player.drawCount / player.updateTime) % 4 + 1]
+    
     if player.state == "right" then
-        love.graphics.draw(player.SS, player.quads[math.floor(player.drawCount / player.updateTime) % 4 + 1], player.x, player.y)    
+        love.graphics.draw(player.SS, thisQuad, player.x, player.y, 0, 1, 1, 40,50)    
     elseif player.state == "left" then
-        love.graphics.draw(player.SS, player.quads[math.floor(player.drawCount / player.updateTime) % 4 + 1], player.x, player.y)
+        love.graphics.draw(player.SS, thisQuad, player.x, player.y, 0, -1, 1, 40,50)    
     elseif player.state == "up" then
-        love.graphics.draw(player.SS, player.quads[math.floor(player.drawCount / player.updateTime) % 4 + 1], player.x, player.y)
+        love.graphics.draw(player.SS, thisQuad, player.x, player.y, -math.pi/4, 1, 1, 40,50)    
     elseif player.state == "down" then
-        love.graphics.draw(player.SS, player.quads[math.floor(player.drawCount / player.updateTime) % 4 + 1], player.x, player.y)
+        love.graphics.draw(player.SS, thisQuad, player.x, player.y, math.pi/4, 1, 1, 40,50)    
     end
 end
 
