@@ -1,9 +1,11 @@
 require "world"
 require "lib"
 require "player"
+require "enemies"
 
 function love.load()
     playerLoad()
+    enemyLoad()
     love.window.setFullscreen(true)
 end
 
@@ -16,6 +18,7 @@ function love.update(dt)
 end
 
 function love.draw()
-  drawWorld()
-  playerDraw()
+    drawWorld()
+    playerDraw()
+    enemyDraw()
 end
