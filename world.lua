@@ -99,6 +99,14 @@ function explode(x, y, p)
     hurtTime = 0.25
     love.graphics.setColor(255, 0, 0)
   end
+  print(enemies[0])
+  for i=#enemies, 0, -1 do
+    if enemies[i] ~= nil then
+    if distSq(enemies[i].x, enemies[i].y, x*16+78, y*16+87) <= 3*16*3*16 then
+      table.remove(enemies, i)
+    end
+  end
+  end
   --Do same for all entities
 end
 
