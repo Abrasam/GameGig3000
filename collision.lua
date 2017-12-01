@@ -26,30 +26,30 @@ function canAddObject(obj)
 end
 
 function updateObject(obj,newVel)
-  if obj.x < 0 and obj.vel.x < 0 then
+  if obj.x <= 0 and obj.vel.x < 0 then
     obj.vel.x = -newVel.x
     obj.x = 0
   elseif obj.x + obj.width > love.graphics.getWidth() and obj.vel.x > 0 then
     obj.vel.x = -newVel.x
-    obj.x = love.graphics.getWidth()
+    obj.x = love.graphics.getWidth() - obj.width
   end
   
-  if obj.y < 0 and obj.vel.y < 0 then
+  if obj.y <= 0 and obj.vel.y < 0 then
     obj.vel.y = -newVel.y
     obj.y = 0
   elseif obj.y + obj.height > love.graphics.getHeight() and obj.vel.y > 0 then
     obj.vel.y = -newVel.y
-    obj.y = love.graphics.getHeight()
+    obj.y = love.graphics.getHeight() - obj.height
   end
 
 
   for i = 0, obj.width, 16 do
-    if get(math.floor((obj.x + i)/16)+1,math.floor(obj.y/16)+1) ~= 0 and obj.vel.y < 0 then
+    if pass(math.floor((obj.x + i)/16)+1,math.floor(obj.y/16)+1) and obj.vel.y < 0 then
       obj.vel.y = -newVel.y
       obj.y = math.floor(obj.y/16)*16+1
       return obj.vel.y
     end
-    if get(math.floor((obj.x + i)/16)+1,math.floor((obj.y+obj.height)/16)-1) ~= 0 and obj.vel.y > 0 then
+    if pass(math.floor((obj.x + i)/16)+1,math.floor((obj.y+obj.height)/16)-1) and obj.vel.y > 0 then
       obj.vel.y = -newVel.y
       obj.y = math.floor(obj.y/16)*16
       return obj.vel.y
@@ -57,12 +57,12 @@ function updateObject(obj,newVel)
   end
  
   for i = 0, obj.height, 16 do
-    if get(math.floor(obj.x/16)+1,math.floor((obj.y + i)/16)+1) ~= 0 and obj.vel.x < 0 then
+    if pass(math.floor(obj.x/16)+1,math.floor((obj.y + i)/16)+1) and obj.vel.x < 0 then
       obj.vel.x = -newVel.x
       obj.x = math.floor(obj.x/16)*16+1
       return obj.vel.x
     end
-    if get(math.floor((obj.x+obj.height)/16)+1,math.floor((obj.y + i)/16)+1) ~= 0 and obj.vel.x > 0 then
+    if pass(math.floor((obj.x+obj.height)/16)+1,math.floor((obj.y + i)/16)+1) and obj.vel.x > 0 then
       obj.vel.x = -newVel.x
       obj.x = math.floor(obj.x/16)*16
       return obj.vel.x

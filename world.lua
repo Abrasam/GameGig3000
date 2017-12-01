@@ -78,7 +78,11 @@ function get(x, y)
 end
 
 function pass(x, y)
-  return world.map[y][x] == 0
+  if x <= 0 or y <= 0 or x > love.graphics.getWidth() or y > love.graphics.getHeight() then
+    return false
+  else
+    return world.map[y][x] == 0
+  end
 end
 
 function explode(x, y, p)
