@@ -3,7 +3,7 @@ require "explosion"
 
 worldTextures = {[0] = love.graphics.newImage("assets/img/environment/bgtile.png"); [1] = love.graphics.newImage("assets/img/environment/sand.png"); [2] = love.graphics.newImage("assets/img/environment/stone.png")}
 
-world = {map=world_01, entities={}, explosions={}}
+world = {map=world_01, entities={}, explosions={}, mines={}}
 
 function drawWorld()
   for y=1,64 do
@@ -14,10 +14,20 @@ function drawWorld()
   for i=1,#world.explosions do
     world.explosions[i]:draw()
   end
+  for i=1,#world.mines do
+    world.mines[i]:draw()
+  end
 end
 
-function updateWorld(dt)
-  explode(math.random(0, 119), math.random(0, 63))
+timeSinceLastMine = 1000
+
+function updateWorld(dt, px, py)
+  timeSinceLastMine = timeSinceLastMine + dt
+  --explode(math.random(0, 119), math.random(0, 63))
+  if love.keyboard.isDown("space") and timeSinceLastMine > 2 then
+    timeSinceLastMine = 0
+    table.insert(world.mines, Mine:new(px, py))
+  end
   kill = {}
   for i=1,#world.explosions do
     world.explosions[i]:delta(dt)
@@ -27,6 +37,16 @@ function updateWorld(dt)
   end
   for i=1,#kill do
     table.remove(world.explosions, kill[i])
+  end
+  killmine = {}
+  for i=1,#world.mines do
+    world.mines[i]:delta(dt)
+    if world.mines[i].dead then
+      table.insert(killmine, i)
+    end
+  end
+  for i=1,#killmine do
+    table.remove(world.mines, killmine[i])
   end
 end
 
@@ -38,7 +58,7 @@ function pass(x, y)
   return world.map[y][x] == 0
 end
 
-function explode(x, y)
+function explode(x, y, p)
   world.explosions[#world.explosions+1] = (Explosion:new(x*16,y*16))
   for i=(x*16),(x*16+78*2) do
     for j=(y*16),(y*16+87*2) do
@@ -47,4 +67,34 @@ function explode(x, y)
       end
     end
   end
+  if distSq(p.x, p.y, x*16-78, y*16-87) <= 3*16*3*16) then
+    p.health = p.health - 20
+  end
+  --Do same for all entities
+end
+
+Mine = {}
+
+function Mine:new(xx, yy, pp)
+  local fields = {x=xx, y=yy, p=pp t=0, exploded=false, imageFile=love.graphics.newImage("assets/img/enemies/mine-small.png")}
+  self.__index = self
+  return setmetatable(fields, self)
+end
+
+function Mine:delta(dt)
+  if self.exploded then
+    return
+  end
+  self.t = self.t + dt
+  if self.t > 2 then
+    self.exploded = true
+    explode(self.x - 78/16+10/16, self.y-87/16, self.p)
+  end
+end
+
+function Mine:draw()
+  if self.exploded then
+    return
+  end
+  love.graphics.draw(self.imageFile, self.x*16-20, self.y*16-20)
 end
