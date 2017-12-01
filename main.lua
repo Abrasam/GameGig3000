@@ -73,6 +73,7 @@ function love.draw()
     love.graphics.draw(blobby, 585, 60)
     love.graphics.draw(love.graphics.newText(love.graphics.newFont(50), "mBlobbies"), 800, 500)
     love.graphics.draw(love.graphics.newText(love.graphics.newFont(20), "Press enter to start..."), 832, 560)
+    love.graphics.draw(love.graphics.newText(love.graphics.newFont(10), "A game by James Rhodes, Anik Roy and Sam Sully."), 1600, 1000)
   end
 end
 
