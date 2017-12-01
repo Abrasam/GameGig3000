@@ -1,7 +1,7 @@
 Blobby = {}
 
 function Blobby:new(xx, yy)
-  local fields = {x=xx, y=yy, safe=false, t=0, imageFile=love.graphics.newImage("assets/img/blob.png")}
+  local fields = {x=xx, y=yy, width=400*0.25, height=225*0.25, safe=false, t=0, imageFile=love.graphics.newImage("assets/img/blob.png")}
   self.__index = self
   return setmetatable(fields, self)
 end
@@ -14,6 +14,9 @@ function Blobby:delta(dt)
 end
 
 function Blobby:draw()
+  if self.safe then
+    return
+  end
   if self.t > 0.5 then
     self.t = 0
   end

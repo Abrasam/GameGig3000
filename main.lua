@@ -12,10 +12,11 @@ function love.load()
     love.window.setFullscreen(true)
     sound = love.audio.newSource("assets/sound/watery_cave.mp3")
     sound:setLooping(true)
-    sound:play()
+    //sound:play()
 end
 
 started = false
+success = true
 
 function love.update(dt)
   collisionUpdate()
@@ -32,6 +33,9 @@ function love.update(dt)
   if love.keyboard.isDown("escape") then
     os.exit(0)
   end
+  if #world.blobs == howManyRescuedBlobs() then
+    success = true
+  end
 end
 
 function love.draw()
@@ -39,6 +43,7 @@ function love.draw()
     drawWorld()
     playerDraw()
     enemyDraw()
+    blobUpdate()
     love.graphics.setColor(50, 50, 50)
     love.graphics.rectangle("fill", 0, 1024, 1920, 1080-1024)
     love.graphics.setColor(255, 0, 0)
@@ -50,5 +55,15 @@ function love.draw()
     love.graphics.draw(blobby, 585, 60)
     love.graphics.draw(love.graphics.newText(love.graphics.newFont(50), "mBlobbies"), 800, 500)
     love.graphics.draw(love.graphics.newText(love.graphics.newFont(20), "Press enter to start..."), 832, 560)
+  end
+end
+
+function blobUpdate()
+  if love.keyboard.isDown("r") then
+    for i=1,#world.blobs do
+      if objCollision(player, world.blobs[i]) then
+        world.blobs[i].safe = true
+      end
+    end
   end
 end
