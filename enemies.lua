@@ -7,7 +7,7 @@ function enemyLoad()
   enemy.sprite = {w = 54, h = 49} 
   enemy.drawCount = 0
   enemy.updateTime = 10
-  enemy.height = 
+  enemy.height = -1
 
   enemies = {}
 
