@@ -3,7 +3,17 @@ require "explosion"
 
 worldTextures = {[0] = love.graphics.newImage("assets/img/environment/bgtile.png"); [1] = love.graphics.newImage("assets/img/environment/sand.png"); [2] = love.graphics.newImage("assets/img/environment/stone.png")}
 
-world = {map=world_01, entities={}, explosions={}, mines={}}
+world = {map=world_01, entities={}, explosions={}, mines={}, blobs = blobs_01}
+
+function howManyRescuedBlobs()
+  count = 0
+  for i=1,#world.blobs do
+    if world.blobs[i].safe then
+      count = count + 1
+    end
+  end
+  return count
+end
 
 function drawWorld()
   for y=1,64 do
@@ -16,6 +26,9 @@ function drawWorld()
   end
   for i=1,#world.mines do
     world.mines[i]:draw()
+  end
+  for i=1,#world.blobs do
+    world.blobs[i]:draw()
   end
 end
 
@@ -54,6 +67,9 @@ function updateWorld(dt, p)
   end
   for i=1,#killmine do
     table.remove(world.mines, killmine[i])
+  end
+  for i=1,#world.blobs do
+    world.blobs[i]:delta(dt)
   end
 end
 
