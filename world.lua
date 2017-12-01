@@ -78,7 +78,7 @@ function get(x, y)
 end
 
 function pass(x, y)
-  if x <= 0 or y <= 0 or x > love.graphics.getWidth() or y > love.graphics.getHeight() then
+  if x <= 0 or y <= 0 or x > 120 or y > 64 then
     return false
   else
     return world.map[y][x] == 0

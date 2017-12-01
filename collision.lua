@@ -44,12 +44,12 @@ function updateObject(obj,newVel)
 
 
   for i = 0, obj.width, 16 do
-    if pass(math.floor((obj.x + i)/16)+1,math.floor(obj.y/16)+1) and obj.vel.y < 0 then
+    if not pass(math.floor((obj.x + i)/16)+1,math.floor(obj.y/16)+1) and obj.vel.y < 0 then
       obj.vel.y = -newVel.y
       obj.y = math.floor(obj.y/16)*16+1
       return obj.vel.y
     end
-    if pass(math.floor((obj.x + i)/16)+1,math.floor((obj.y+obj.height)/16)-1) and obj.vel.y > 0 then
+    if not pass(math.floor((obj.x + i)/16)+1,math.floor((obj.y+obj.height)/16)-1) and obj.vel.y > 0 then
       obj.vel.y = -newVel.y
       obj.y = math.floor(obj.y/16)*16
       return obj.vel.y
@@ -57,12 +57,12 @@ function updateObject(obj,newVel)
   end
  
   for i = 0, obj.height, 16 do
-    if pass(math.floor(obj.x/16)+1,math.floor((obj.y + i)/16)+1) and obj.vel.x < 0 then
+    if not pass(math.ceil(obj.x/16),math.ceil((obj.y + i)/16)) and obj.vel.x < 0 then
       obj.vel.x = -newVel.x
       obj.x = math.floor(obj.x/16)*16+1
       return obj.vel.x
     end
-    if pass(math.floor((obj.x+obj.height)/16)+1,math.floor((obj.y + i)/16)+1) and obj.vel.x > 0 then
+    if not pass(math.floor((obj.x+obj.height)/16)+1,math.floor((obj.y + i)/16)+1) and obj.vel.x > 0 then
       obj.vel.x = -newVel.x
       obj.x = math.floor(obj.x/16)*16
       return obj.vel.x
