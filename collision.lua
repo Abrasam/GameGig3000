@@ -1,8 +1,13 @@
 function collisionUpdate()
   updateObject(player)
   for i = #enemies, 1 , -1 do
-    updateObject(enemies[i])
-end  
+    thisEnemy = enemies[i]
+    updateObject(thisEnemy)
+    if objCollision(player,thisEnemy) then
+      playerHurt()
+    end
+  end  
+end
 
 function updateObject(obj)
   for i = 0, obj.w, 16 do 
