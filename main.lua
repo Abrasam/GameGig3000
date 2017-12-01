@@ -11,7 +11,7 @@ end
 
 function love.update(dt)
     playerUpdate()
-    updateWorld(dt, player.x/16, player.y/16)
+    updateWorld(dt, player.x/16, player.y/16, player)
     enemyUpdate(dt)
     if love.keyboard.isDown("escape") then
       os.exit(0)
