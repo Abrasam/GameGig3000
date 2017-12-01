@@ -1,5 +1,5 @@
 function collisionUpdate()
-  updateObject(player, 0)
+  updateObject(player, {x = 0, y = 0})
   for i = #enemies, 1 , -1 do
     thisEnemy = enemies[i]
     updateObject(thisEnemy, thisEnemy.vel)
@@ -14,21 +14,46 @@ function objCollision(obj1, obj2)
 end
 
 function updateObject(obj,newVel)
+  if obj.x < 0 and obj.vel.x < 0 then
+    obj.vel.x = -newVel.x
+    obj.x = 0
+  elseif obj.x > love.graphics.getWidth() and obj.vel.x > 0 then
+    obj.vel.x = -newVel.x
+    obj.x = love.graphics.getWidth()
+  end
+  
+  if obj.y < 0 and obj.vel.y < 0 then
+    obj.vel.y = -newVel.y
+    obj.y = 0
+  elseif obj.y > love.graphics.getHeight() and obj.vel.y > 0 then
+    obj.vel.y = -newVel.y
+    obj.y = love.graphics.getHeight()
+  end
+
+
   for i = 0, obj.width, 16 do
     if get(math.floor((obj.x + i)/16)+1,math.floor(obj.y/16)+1) ~= 0 and obj.vel.y < 0 then
       obj.vel.y = -newVel.y
+      obj.y = math.floor(obj.y/16)*16
+      return obj.vel.y
     end
     if get(math.floor((obj.x + i)/16)+1,math.floor((obj.y+obj.height)/16)+1) ~= 0 and obj.vel.y > 0 then
       obj.vel.y = -newVel.y
+      obj.y = math.floor(obj.y/16)*16
+      return obj.vel.y
     end
   end
  
   for i = 0, obj.height, 16 do 
-    if get(math.floor((obj.y + i)/16)+1,math.floor(obj.x/16)+1) ~= 0 and obj.vel.x < 0 then
+    if get(math.floor(obj.x/16)+1,math.floor((obj.y + i)/16)+1) ~= 0 and obj.vel.x < 0 then
       obj.vel.x = -newVel.x
+      obj.x = math.floor(obj.x/16)*16+1
+      return obj.vel.x
     end
-    if get(math.floor((obj.y + i)/16)+1,math.floor((obj.x+obj.height)/16)+1) ~= 0 and obj.vel.x > 0 then
+    if get(math.floor((obj.x+obj.height)/16)+1,math.floor((obj.y + i)/16)+1) ~= 0 and obj.vel.x > 0 then
       obj.vel.x = -newVel.x
+      obj.x = math.floor(obj.x/16)*16
+      return obj.vel.x
     end
   end 
 end
