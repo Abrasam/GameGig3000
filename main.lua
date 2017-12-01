@@ -4,10 +4,12 @@ require "player"
 require "enemies"
 require "collision"
 require "bubble"
+require "bullets"
 
 function love.load()
     playerLoad()
     enemyLoad()
+    bulletLoad()
     blobby = love.graphics.newImage("assets/img/blobby.png")
     blob = love.graphics.newImage("assets/img/blob.png")
     love.window.setFullscreen(true)
@@ -36,6 +38,7 @@ function love.update(dt)
     playerUpdate()
     updateWorld(dt, player)
     enemyUpdate(dt)
+    bulletUpdate(enemies)
   else
     if love.keyboard.isDown("return") then
       started = true
@@ -70,6 +73,7 @@ function love.draw()
       drawWorld()
       playerDraw()
       enemyDraw()
+      bulletDraw()
       blobUpdate()
       for i=1,#bubbles do
         bubbles[i]:draw()
