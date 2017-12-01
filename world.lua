@@ -15,8 +15,8 @@ function drawWorld()
 end
 
 function updateWorld(dt)
-  for expl in world.explosions do
-    expl.delta(dt)
+  for i=1,#world.explosions do
+    explosions[i].delta(dt)
   end
 end
 

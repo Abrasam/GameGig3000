@@ -7,5 +7,6 @@ function Explosion::new(xx, yy, rr)
 end
 
 function Explosion::delta(dt)
-  
+  t += dt
+  if t > 
 end
