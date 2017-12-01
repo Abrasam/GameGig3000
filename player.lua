@@ -109,13 +109,13 @@ function playerDraw()
     thisQuad = player.quads[math.floor(player.drawCount / player.updateTime) % 4 + 1]
     
     if player.state == "right" then
-        love.graphics.draw(player.SS, thisQuad, player.x, player.y, 0, 1, 1, 40,25)    
+        love.graphics.draw(player.SS, thisQuad, player.x, player.y, 0, 1, 1, 0, 0)    
     elseif player.state == "left" then
-        love.graphics.draw(player.SS, thisQuad, player.x-player.width, player.y, 0, -1, 1, 40,25)    
+        love.graphics.draw(player.SS, thisQuad, player.x+player.width, player.y, 0, -1, 1)    
     elseif player.state == "up" then
-        love.graphics.draw(player.SS, thisQuad, player.x, player.y, 0, 1, 1, 40,25)    
+        love.graphics.draw(player.SS, thisQuad, player.x, player.y, 0, 1, 1)    
     elseif player.state == "down" then
-        love.graphics.draw(player.SS, thisQuad, player.x, player.y, 0, 1, 1, 40,25)    
+        love.graphics.draw(player.SS, thisQuad, player.x, player.y, 0, 1, 1)    
     end
 end
 
