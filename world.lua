@@ -1,13 +1,8 @@
+require "worlds"
+
 worldTextures = {[0] = love.graphics.newImage("assets/img/environment/nada.png"); [1] = love.graphics.newImage("assets/img/environment/sand.png"); [2] = love.graphics.newImage("assets/img/environment/stone.png")}
 
-world = {}
-
-for i=1,64 do
-  world[i] = {}
-  for j=1,120 do
-    world[i][j] = math.random(0,2)
-  end
-end
+world = world_01
 
 function drawWorld()
   for y=1,64 do
