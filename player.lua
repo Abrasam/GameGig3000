@@ -118,13 +118,13 @@ function playerDraw()
     -- love.graphics.rectangle("fill", player.x, player.y, 50, 50)
     -- love.graphics.setColor(255,255,255)
     player.drawCount = player.drawCount + 1
-    if player.state = "right" then
+    if player.state == "right" then
         love.graphics.draw(player.SS, player.quads[math.floor(player.drawCount / player.updateTime) % 4 + 1], player.x, player.y)    
-    elseif player.state = "left" then
+    elseif player.state == "left" then
         love.graphics.draw(player.SS, player.quads[math.floor(player.drawCount / player.updateTime) % 4 + 1], player.x, player.y)
-    elseif player.state = "up" then
+    elseif player.state == "up" then
         love.graphics.draw(player.SS, player.quads[math.floor(player.drawCount / player.updateTime) % 4 + 1], player.x, player.y)
-    elseif player.state = "down" then
+    elseif player.state == "down" then
         love.graphics.draw(player.SS, player.quads[math.floor(player.drawCount / player.updateTime) % 4 + 1], player.x, player.y)
     end
 end
