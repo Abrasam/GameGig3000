@@ -2,7 +2,7 @@ function collisionUpdate()
   updateObject(player, 0)
   for i = #enemies, 1 , -1 do
     thisEnemy = enemies[i]
-    updateObject(thisEnemy, -thisEnemy.vel)
+    updateObject(thisEnemy, thisEnemy.vel)
     if objCollision(player,thisEnemy) then
       playerHurt()
     end
