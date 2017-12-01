@@ -1,4 +1,5 @@
 require "worlds"
+require "explosion"
 
 worldTextures = {[0] = love.graphics.newImage("assets/img/environment/bgtile.png"); [1] = love.graphics.newImage("assets/img/environment/sand.png"); [2] = love.graphics.newImage("assets/img/environment/stone.png")}
 
@@ -29,5 +30,5 @@ function pass(x, y)
 end
 
 function explode(x, y)
-  
+  world.explosions.add(Explosion:new(x,y, 3))
 end
