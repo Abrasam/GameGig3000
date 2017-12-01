@@ -1,3 +1,5 @@
+require "lib"
+
 function playerLoad()
     player = {}
     
@@ -50,14 +52,6 @@ function setPos(player,x,y)
     end
 end
 
-function clamp(x,mx)
-
-    if math.abs(x) > math.abs(mx) then
-        return mx
-    else
-        return x
-    end
-end
 
 function playerUpdate()
     local dt = love.timer.getDelta()
