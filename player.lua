@@ -33,7 +33,7 @@ function playerLoad()
 end
 
 function playerHurt(x)
-    player.health = player.health - x
+    player.health = player.health - 10
 end
 
 
