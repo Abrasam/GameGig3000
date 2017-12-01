@@ -30,15 +30,15 @@ function createEnemy()
   --   random_x = 2 
   -- end
   random_x = 50
-  if canAddObject({height = enemy.sprite.h, width = enemy.sprite.w, x = random_x, y = random_y, vel={x=3, y=0}}) then
-    table.insert(enemies, {height = enemy.sprite.h, width = enemy.sprite.w, x = random_x, y = random_y, vel={x=3, y=0}})
-  end
+--  if canAddObject({height = enemy.sprite.h, width = enemy.sprite.w, x = random_x, y = random_y, vel={x=3, y=0}}) then
+--    table.insert(enemies, {height = enemy.sprite.h, width = enemy.sprite.w, x = random_x, y = random_y, vel={x=3, y=0}})
+--  end
 end
 
 function enemyUpdate(dt)
-  if drawCount % 60 == 0 then enemiesPerSec = enemiesPerSec + 1 end
+  if enemy.drawCount % 60 == 0 then enemiesPerSec = enemiesPerSec + 1 end
 
-  if drawCount % (60/enemiesPerSec) == 0 then createEnemy() end
+  if enemy.drawCount % (60/enemiesPerSec) == 0 then createEnemy() end
 
 
   for i=#enemies, 1, -1 do
