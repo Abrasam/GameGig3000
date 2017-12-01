@@ -15,15 +15,9 @@ function playerLoad()
     player.DEC = 8
     
     player.state = "right"
-<<<<<<< HEAD
-    player.dir = "l"
-    player.width = 48
-    player.height = 20
-=======
     player.dir = 1
     player.width = 80
     player.height = 30
->>>>>>> d5866439e397b9058c765b8081789c73ce301c67
 
     player.SS = love.graphics.newImage("assets/img/player/player-swiming.png")
     player.quads = {}
