@@ -2,6 +2,7 @@ require "world"
 require "lib"
 require "player"
 require "enemies"
+require "collision"
 
 function love.load()
     playerLoad()
@@ -14,6 +15,8 @@ end
 started = false
 
 function love.update(dt)
+  collisionUpdate()
+
   if started then
     playerUpdate()
     updateWorld(dt, player)
