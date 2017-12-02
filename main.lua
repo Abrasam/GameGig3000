@@ -97,7 +97,7 @@ end
 
 function blobUpdate()
   if love.keyboard.isDown("r") then
-    for i=1,#world.blobs do
+    for i=#world.blobs,1,-1 do
       if objCollision(player, world.blobs[i]) then
         world.blobs[i].safe = true
       end

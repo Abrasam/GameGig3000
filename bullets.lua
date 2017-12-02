@@ -1,4 +1,3 @@
-
 function bulletLoad()
     bullets = {}
     BULLET_VEL = 20
@@ -30,7 +29,6 @@ end
 
 function addBullet(d, startX, startY)
     time = love.timer.getTime()    
-    print(time - lastBullet)
     if time - lastBullet > 0.5 then
         table.insert(bullets, {x=startX,y=startY, vel = {x = BULLET_VEL, y = 0},dir=d, width=5, height=5})        
         lastBullet =love.timer.getTime()    

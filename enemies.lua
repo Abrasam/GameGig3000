@@ -21,13 +21,11 @@ function enemyLoad()
 end
 
 function createEnemy()
-  local random_y = math.random(100,love.graphics.getHeight()-enemy.sprite.h-20)
-  print(random_y)
+  random_y = math.random(100,love.graphics.getHeight()-enemy.sprite.h-20)
   local r = math.random()
-  --random_y = 50
-   if r<0.5 then 
+  if r<0.5 then 
      random_x = love.graphics.getWidth()-enemy.sprite.w-2
-   else 
+  else 
      random_x = 50 
   end
   o = {height = enemy.sprite.h, width = enemy.sprite.w, x = random_x, y = random_y, vel={x=math.random(1,4), y=math.random(1,4)}}

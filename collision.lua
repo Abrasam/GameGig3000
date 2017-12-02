@@ -1,5 +1,5 @@
 function collisionUpdate()
-  updateObject(player, {x = 0, y = 5})
+  updateObject(player, {x = 0, y = player.vel.y})
   for i = #enemies, 1 , -1 do
     thisEnemy = enemies[i]
     updateObject(thisEnemy, thisEnemy.vel)
