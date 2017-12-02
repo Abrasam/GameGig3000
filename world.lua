@@ -44,7 +44,7 @@ function updateWorld(dt, p)
   end
   timeSinceLastMine = timeSinceLastMine + dt
   --explode(math.random(0, 119), math.random(0, 63))
-  if love.keyboard.isDown("space") and timeSinceLastMine > 2 then
+  if love.keyboard.isDown("space") and timeSinceLastMine > 0.75 then
     timeSinceLastMine = 0
     table.insert(world.mines, Mine:new(p.x/16, p.y/16, p))
   end
