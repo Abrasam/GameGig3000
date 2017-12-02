@@ -29,6 +29,7 @@ function drawWorld()
   end
   for i=1,#world.blobs do
     world.blobs[i]:draw()
+    --love.graphics.rectangle("fill",world.blobs[i].x,world.blobs[i].y,world.blobs[i].width,world.blobs[i].height)
   end
 end
 
@@ -99,7 +100,6 @@ function explode(x, y, p)
     hurtTime = 0.25
     love.graphics.setColor(255, 0, 0)
   end
-  print(enemies[0])
   for i=#enemies, 0, -1 do
     if enemies[i] ~= nil then
     if distSq(enemies[i].x, enemies[i].y, x*16+78, y*16+87) <= 3*16*3*16 then
